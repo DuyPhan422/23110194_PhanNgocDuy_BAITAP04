@@ -2,7 +2,7 @@ package vn.iotstar.services;
 
 import java.util.List;
 
-import vn.iotstar.entities.Category;
+import vn.iotstar.entity.Category;
 
 public interface CategoryService {
 	List<Category> findAll();
@@ -10,6 +10,5 @@ public interface CategoryService {
 	void update(Category category);
 	void delete(int id);
 	Category findById(int id);
-	
+    List<Category> findByUserId(int userId);
 }
-
