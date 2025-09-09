@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Đăng Nhập</title>
+    <title>Thông Tin Tài Khoản</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -15,7 +15,7 @@
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             font-family: 'Segoe UI', sans-serif;
         }
-        .login-card {
+        .account-card {
             width: 100%;
             max-width: 450px;
             padding: 40px;
@@ -24,28 +24,29 @@
             background: #fff;
             transition: transform 0.3s ease;
         }
-        .login-card:hover {
+        .account-card:hover {
             transform: translateY(-5px);
         }
-        .btn-primary {
-            background: #6e8efb;
-            border: none;
+        .btn-primary, .btn-outline-primary {
+            border-radius: 8px;
             padding: 12px;
             font-size: 1.1rem;
             transition: background 0.3s ease;
         }
+        .btn-primary {
+            background: #6e8efb;
+            border: none;
+        }
         .btn-primary:hover {
             background: #5a78e0;
         }
-        .form-control {
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            transition: border-color 0.3s ease;
-        }
-        .form-control:focus {
+        .btn-outline-primary {
             border-color: #6e8efb;
-            box-shadow: 0 0 8px rgba(110, 142, 251, 0.3);
+            color: #6e8efb;
+        }
+        .btn-outline-primary:hover {
+            background: #6e8efb;
+            color: #fff;
         }
         .text-center a {
             color: #6e8efb;
@@ -59,33 +60,34 @@
         .alert {
             border-radius: 8px;
         }
+        .info-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-<div class="login-card">
-    <h2 class="text-center mb-4">Đăng Nhập</h2>
+<div class="account-card">
+    <h2 class="text-center mb-4">Thông Tin Tài Khoản</h2>
     <c:if test="${alert != null}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             ${alert}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </c:if>
-    <form action="${pageContext.request.contextPath}/login" method="post">
-        <div class="mb-3">
-            <label class="form-label">Tài khoản</label>
-            <input type="text" name="username" class="form-control" placeholder="Nhập tài khoản" required>
+    <c:if test="${user != null}">
+        <div class="info-box">
+            <p><strong>Tài khoản:</strong> ${user.userName}</p>
+            <p><strong>Mật khẩu:</strong> ${user.passWord}</p>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Mật khẩu</label>
-            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
-        <div class="text-center mt-3">
-            <a href="${pageContext.request.contextPath}/forgetpass">Quên mật khẩu?</a>
-            <br>
-            <a href="${pageContext.request.contextPath}/register">Tạo tài khoản mới</a>
-        </div>
-    </form>
+    </c:if>
+    <div class="text-center">
+        <a href="${pageContext.request.contextPath}/login" class="btn btn-primary w-100 mb-2">Quay lại Đăng Nhập</a>
+        <a href="${pageContext.request.contextPath}/resetpass?email=${user.email}" class="btn btn-outline-primary w-100 mb-2">Tạo Mật Khẩu Mới</a>
+        <a href="${pageContext.request.contextPath}/forgetpass" class="text-center">Thử email khác</a>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Đăng Nhập</title>
+    <title>Quên Mật Khẩu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -15,7 +15,7 @@
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             font-family: 'Segoe UI', sans-serif;
         }
-        .login-card {
+        .forgetpass-card {
             width: 100%;
             max-width: 450px;
             padding: 40px;
@@ -24,7 +24,7 @@
             background: #fff;
             transition: transform 0.3s ease;
         }
-        .login-card:hover {
+        .forgetpass-card:hover {
             transform: translateY(-5px);
         }
         .btn-primary {
@@ -62,28 +62,22 @@
     </style>
 </head>
 <body>
-<div class="login-card">
-    <h2 class="text-center mb-4">Đăng Nhập</h2>
+<div class="forgetpass-card">
+    <h2 class="text-center mb-4">Quên Mật Khẩu</h2>
     <c:if test="${alert != null}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             ${alert}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </c:if>
-    <form action="${pageContext.request.contextPath}/login" method="post">
+    <form action="${pageContext.request.contextPath}/forgetpass" method="post">
         <div class="mb-3">
-            <label class="form-label">Tài khoản</label>
-            <input type="text" name="username" class="form-control" placeholder="Nhập tài khoản" required>
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Nhập email của bạn" required>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Mật khẩu</label>
-            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
+        <button type="submit" class="btn btn-primary w-100">Gửi Yêu Cầu</button>
         <div class="text-center mt-3">
-            <a href="${pageContext.request.contextPath}/forgetpass">Quên mật khẩu?</a>
-            <br>
-            <a href="${pageContext.request.contextPath}/register">Tạo tài khoản mới</a>
+            <a href="${pageContext.request.contextPath}/login">Quay lại Đăng Nhập</a>
         </div>
     </form>
 </div>
