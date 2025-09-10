@@ -1,46 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0">
-    <display-name>BaiTap04</display-name>
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
-    
-    <servlet>
-        <servlet-name>CategoryController</servlet-name>
-        <servlet-class>controller.CategoryController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CategoryController</servlet-name>
-        <url-pattern>/CategoryController</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>WaitingController</servlet-name>
-        <servlet-class>controller.WaitingController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>WaitingController</servlet-name>
-        <url-pattern>/WaitingController</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>HomeController</servlet-name>
-        <servlet-class>controller.HomeController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HomeController</servlet-name>
-        <url-pattern>/HomeController</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>LogoutController</servlet-name>
-        <servlet-class>controller.LogoutController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogoutController</servlet-name>
-        <url-pattern>/LogoutController</url-pattern>
-    </servlet-mapping>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+	<display-name>BaiTap04</display-name>
+	<!-- Trang mặc định -->
+	<welcome-file-list>
+		<welcome-file>views/login.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<!-- Chỉ dùng COOKIE để theo dõi session -->
+	<session-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+
+	<!-- Bảo đảm UTF-8 toàn app -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Servlet CRUD cho Category -->
+	<servlet>
+		<servlet-name>CategoryServlet</servlet-name>
+		<!-- ĐỔI dòng dưới thành class thật của bạn, ví dụ: webanime.controllers.CategoryServlet -->
+		<servlet-class>your.package.CategoryServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryServlet</servlet-name>
+		<url-pattern>/categories</url-pattern>
+		<url-pattern>/categories/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Đặt encoding cho JSP -->
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>UTF-8</page-encoding>
+		</jsp-property-group>
+	</jsp-config>
+
+	<!-- (Tuỳ chọn) Trang lỗi chung -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error.jsp</location>
+	</error-page>
+
 </web-app>
